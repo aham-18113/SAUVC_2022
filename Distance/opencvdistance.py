@@ -37,7 +37,7 @@ def Distance_finder(Focal_Length, Known_width, obj_width_in_frame):
     return distance
 
 
-ref_image = cv2.imread("C:/Users/Dell/Desktop/SAUVC/Distance/rf.png")
+ref_image = cv2.imread("C:/Users/Dell/Desktop/SAUVC_2022/Distance/rf.png")
 ref_image_obj_width = obj_data(ref_image)
 Focal_length_found = Focal_Length_Finder(
     Known_distance, Known_width, ref_image_obj_width
