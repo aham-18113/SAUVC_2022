@@ -6,36 +6,16 @@ thvalue = [1500, 1500, 1500, 1500]
 
 
 def forward():
-    result_str = "Reaches Maximun Speed"
     if thvalue[0] < 1850 and thvalue[1] < 1850:
         thvalue[0] = thvalue[0] + 5
         thvalue[1] = thvalue[1] + 5
-        result_str = (
-            "ROV IS IN MOTION \n"
-            + "Thruster 1 is moving forward with "
-            + str(abs(1500 - thvalue[0]))
-            + " unit speed \n"
-            + "Thruster 2 is moving forward with "
-            + str(abs(1500 - thvalue[1]))
-            + " unit speed"
-        )
     print("forward")
 
 
 def right():
-    result_str = "Reaches Maximun Speed"
     if thvalue[0] < 1850 and thvalue[1] < 1850:
         thvalue[0] = thvalue[0] + 5
         thvalue[1] = thvalue[1] + 5
-        result_str = (
-            "ROV IS IN MOTION \n"
-            + "Thruster 1 is moving forward with "
-            + str(abs(1500 - thvalue[0]))
-            + " unit speed \n"
-            + "Thruster 2 is moving forward with "
-            + str(abs(1500 - thvalue[1]))
-            + " unit speed"
-        )
     print("right")
 
 
@@ -101,11 +81,10 @@ while True:
             (255, 0, 0),
             2,
         )
-    print(Distance)
-    if Distance > 14 and Distance < 16:
-        right()
-    else:
+    if Distance > 16:
         forward()
+    else:
+        right()
 
     cv2.imshow("FRAME", frame)
     if cv2.waitKey(1) & 0xFF == 27:
