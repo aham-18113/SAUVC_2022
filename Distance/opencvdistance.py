@@ -1,5 +1,43 @@
+from turtle import distance
 import cv2
 import numpy as np
+
+thvalue = [1500, 1500, 1500, 1500]
+
+
+def forward():
+    result_str = "Reaches Maximun Speed"
+    if thvalue[0] < 1850 and thvalue[1] < 1850:
+        thvalue[0] = thvalue[0] + 5
+        thvalue[1] = thvalue[1] + 5
+        result_str = (
+            "ROV IS IN MOTION \n"
+            + "Thruster 1 is moving forward with "
+            + str(abs(1500 - thvalue[0]))
+            + " unit speed \n"
+            + "Thruster 2 is moving forward with "
+            + str(abs(1500 - thvalue[1]))
+            + " unit speed"
+        )
+    print("forward")
+
+
+def right():
+    result_str = "Reaches Maximun Speed"
+    if thvalue[0] < 1850 and thvalue[1] < 1850:
+        thvalue[0] = thvalue[0] + 5
+        thvalue[1] = thvalue[1] + 5
+        result_str = (
+            "ROV IS IN MOTION \n"
+            + "Thruster 1 is moving forward with "
+            + str(abs(1500 - thvalue[0]))
+            + " unit speed \n"
+            + "Thruster 2 is moving forward with "
+            + str(abs(1500 - thvalue[1]))
+            + " unit speed"
+        )
+    print("right")
+
 
 cap = cv2.VideoCapture(0)
 lower_range = np.array([0, 203, 147])  # color is orange
@@ -51,6 +89,7 @@ while True:
     ret, frame = cap.read()
     frame = cv2.resize(frame, (640, 480))
     obj_width_in_frame = obj_data(frame)
+    Distance = -1
     if obj_width_in_frame != 0:
         Distance = Distance_finder(Focal_length_found, Known_width, obj_width_in_frame)
         cv2.putText(
@@ -62,9 +101,15 @@ while True:
             (255, 0, 0),
             2,
         )
+    print(Distance)
+    if Distance > 14 and Distance < 16:
+        right()
+    else:
+        forward()
 
     cv2.imshow("FRAME", frame)
     if cv2.waitKey(1) & 0xFF == 27:
         break
+
 cap.release()
 cv2.destroyAllWindows()
